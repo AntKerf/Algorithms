@@ -7,9 +7,14 @@
 
 int main()
 {
-	//Пузырьковая сортировка
 	std::vector<int> vec = { 0,5,1,56,2,123,3 };
-	Sorts::buble(vec);
+
+	//Пузырьковая сортировка
+	Sorts::Buble(vec);
+
+	//Сортировка вставками
+	Sorts::Insertion(vec);
+
 	for (auto el : vec) std::cout << el << " ";
 
 	system("PAUSE");
