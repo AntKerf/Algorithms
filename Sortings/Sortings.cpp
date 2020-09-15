@@ -10,13 +10,16 @@ int main()
 	std::vector<int> vec = { 0,5,1,56,2,123,3 };
 
 	//Пузырьковая сортировка
-//	Sorts::Buble(vec);
+	Sorts::Buble(vec);
 
 	//Шейкерная сортировка
-//	Sorts::Cocktail(vec);
+	Sorts::Cocktail(vec);
 
 	//Сортировка вставками
 	Sorts::Insertion(vec);
+
+	//Сортировка слиянием
+	Sorts::Merge(vec);
 
 	for (auto el : vec) std::cout << el << " ";
 
