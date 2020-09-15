@@ -45,7 +45,7 @@ inline void Sorts::Buble(T& arr)
 	}
 	catch (std::exception const& e)
 	{
-		std::cerr << "Error: " << e.what() << std::endl;
+		std::cerr << "Error buble sort: " << e.what() << std::endl;
 	}
 }
 
@@ -56,7 +56,7 @@ inline void Sorts::Cocktail(T& arr)
 	{
 		if (arr.size() < 2)
 		{
-			return;
+			throw std::exception("Very small array size for sorting");
 		}
 		size_t left = 0, right = 0;
 		right = arr.size() - 1;
@@ -86,7 +86,7 @@ inline void Sorts::Cocktail(T& arr)
 	}
 	catch (std::exception const& e)
 	{
-		std::cerr << "Error: " << e.what() << std::endl;
+		std::cerr << "Error cocktail sort: " << e.what() << std::endl;
 	}
 }
 
@@ -120,7 +120,7 @@ inline void Sorts::Insertion(T& arr)
 	}
 	catch (std::exception const& e)
 	{
-		std::cerr << "Error: " << e.what() << std::endl;
+		std::cerr << "Error insertion sort: " << e.what() << std::endl;
 	}
 }
 
@@ -193,7 +193,7 @@ inline void Sorts::Merge(T& arr)
 	}
 	catch (std::exception const& e)
 	{
-		std::cerr << "Error: " << e.what() << std::endl;
+		std::cerr << "Error megre sort: " << e.what() << std::endl;
 	}
 }
 
@@ -208,6 +208,6 @@ inline void Sorts::swap(T& arr, size_t first, size_t second)
 	}
 	catch (std::exception const& e)
 	{
-		std::cerr << "Error: " << e.what() << std::endl;
+		std::cerr << "Error swap func: " << e.what() << std::endl;
 	}
 }
