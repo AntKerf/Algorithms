@@ -118,9 +118,6 @@ inline void Sorts::Merge(T& arr)
 		Merge(left);
 		Merge(right);
 
-		Buble(left);
-		Buble(right);
-
 		size_t countItems = left.size() + right.size();
 		size_t leftIndex = 0, rightIndex = 0;
 		size_t curentItems = 0;
@@ -161,7 +158,10 @@ inline void Sorts::Merge(T& arr)
 			}
 		}
 	}
-	return;
+	else {
+		Buble(arr);
+		return;
+	}
 }
 
 template<typename T>
