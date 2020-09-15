@@ -26,148 +26,188 @@ private:
 template<typename T>
 inline void Sorts::Buble(T& arr)
 {
-	bool swaped;
-	do
+	try
 	{
-		swaped = false;
-		for (size_t i = 0; i < arr.size() - 1; i++)
+		bool swaped;
+		do
 		{
-
-			if (arr[i] > arr[i + 1])
+			swaped = false;
+			for (size_t i = 0; i < arr.size() - 1; i++)
 			{
-				swap(arr, i, i + 1);
-				swaped = true;
+
+				if (arr[i] > arr[i + 1])
+				{
+					swap(arr, i, i + 1);
+					swaped = true;
+				}
 			}
-		}
-	} while (swaped);
+		} while (swaped);
+	}
+	catch (std::exception const& e)
+	{
+		std::cerr << "Error: " << e.what() << std::endl;
+	}
 }
 
 template<typename T>
 inline void Sorts::Cocktail(T& arr)
 {
-	size_t left = 0, right = arr.size() - 1;
-	bool swaped;
-	do
+	try
 	{
-		swaped = false;
-		for (size_t i = left; i < right; i++)
+		if (arr.size() < 2)
 		{
-			if (arr[i] > arr[i + 1])
-			{
-				swap(arr, i, i + 1);
-				swaped = true;
-			}
+			return;
 		}
-		right--;
-		for (size_t i = right; i > left; i--)
+		size_t left = 0, right = 0;
+		right = arr.size() - 1;
+		bool swaped;
+		do
 		{
-			if (arr[i] < arr[i - 1])
+			swaped = false;
+			for (size_t i = left; i < right; i++)
 			{
-				swap(arr, i, i - 1);
-				swaped = true;
+				if (arr[i] > arr[i + 1])
+				{
+					swap(arr, i, i + 1);
+					swaped = true;
+				}
 			}
-		}
-		left++;
-	} while (swaped);
+			right-=1;
+			for (size_t i = right; i > left; i--)
+			{
+				if (arr[i] < arr[i - 1])
+				{
+					swap(arr, i, i - 1);
+					swaped = true;
+				}
+			}
+			left++;
+		} while (swaped);
+	}
+	catch (std::exception const& e)
+	{
+		std::cerr << "Error: " << e.what() << std::endl;
+	}
 }
 
 template<typename T>
 inline void Sorts::Insertion(T& arr)
 {
-	bool swaped;
-	do {
-		swaped = false;
-		for (size_t i = 1; i < arr.size(); i++)
-		{
-			if (arr[i - 1] > arr[i])
+	try
+	{
+		bool swaped;
+		do {
+			swaped = false;
+			for (size_t i = 1; i < arr.size(); i++)
 			{
-				size_t j = i;
-				while (arr[i] < arr[j - 1] && j>0) j--;//поиск места вставки
-				if (j != i)
+				if (arr[i - 1] > arr[i])
 				{
-					auto tmpValue = arr[i];
-					for (size_t t = i; t >= j; t--)//сдвиг элементов
+					size_t j = i;
+					while (arr[i] < arr[j - 1] && j>0) j--;//поиск места вставки
+					if (j != i)
 					{
-						arr[t] = arr[t - 1];
+						auto tmpValue = arr[i];
+						for (size_t t = i; t >= j; t--)//сдвиг элементов
+						{
+							arr[t] = arr[t - 1];
+						}
+						arr[j] = tmpValue;//вставка
+						swaped = true;
 					}
-					arr[j] = tmpValue;//вставка
-					swaped = true;
 				}
 			}
-		}
-	} while (swaped);
+		} while (swaped);
+	}
+	catch (std::exception const& e)
+	{
+		std::cerr << "Error: " << e.what() << std::endl;
+	}
 }
 
 template<typename T>
 inline void Sorts::Merge(T& arr)
 {
-	if (arr.size() > 2)
+	try
 	{
-		size_t leftSize = arr.size() / 2;
-		size_t rightSize = arr.size() - leftSize;
-		T left(leftSize);
-		T right(rightSize);
-		for (size_t i = 0; i < leftSize; i++)
+		if (arr.size() > 2)
 		{
-			left[i] = arr[i];
-		}
-		for (size_t i = 0; i < rightSize; i++)
-		{
-			right[i] = arr[i + leftSize];
-		}
-		Merge(left);
-		Merge(right);
-
-		size_t countItems = left.size() + right.size();
-		size_t leftIndex = 0, rightIndex = 0;
-		size_t curentItems = 0;
-		while (countItems > 0)
-		{
-			if (leftIndex < left.size())
+			size_t leftSize = arr.size() / 2;
+			size_t rightSize = arr.size() - leftSize;
+			T left(leftSize);
+			T right(rightSize);
+			for (size_t i = 0; i < leftSize; i++)
 			{
-				if (rightIndex < right.size())
+				left[i] = arr[i];
+			}
+			for (size_t i = 0; i < rightSize; i++)
+			{
+				right[i] = arr[i + leftSize];
+			}
+			Merge(left);
+			Merge(right);
+
+			size_t countItems = left.size() + right.size();
+			size_t leftIndex = 0, rightIndex = 0;
+			size_t curentItems = 0;
+			while (countItems > 0)
+			{
+				if (leftIndex < left.size())
 				{
-					if (left[leftIndex] <= right[rightIndex])
+					if (rightIndex < right.size())
 					{
-						arr[curentItems] = left[leftIndex];
-						curentItems++;
-						countItems--;
-						leftIndex++;
+						if (left[leftIndex] <= right[rightIndex])
+						{
+							arr[curentItems] = left[leftIndex];
+							curentItems++;
+							countItems--;
+							leftIndex++;
+						}
+						else {
+							arr[curentItems] = right[rightIndex];
+							curentItems++;
+							rightIndex++;
+							countItems--;
+						}
 					}
 					else {
-						arr[curentItems] = right[rightIndex];
-						curentItems++;
-						rightIndex++;
-						countItems--;
+						for (size_t i = leftIndex; i < left.size(); i++, curentItems++, leftIndex++, countItems--)
+						{
+							arr[curentItems] = left[i];
+						}
+						break;
 					}
 				}
 				else {
-					for (size_t i = leftIndex; i < left.size(); i++, curentItems++, leftIndex++, countItems--)
+					for (size_t i = rightIndex; i < right.size(); i++, curentItems++, rightIndex++, countItems--)
 					{
-						arr[curentItems] = left[i];
+						arr[curentItems] = right[i];
 					}
 					break;
 				}
 			}
-			else {
-				for (size_t i = rightIndex; i < right.size(); i++, curentItems++, rightIndex++, countItems--)
-				{
-					arr[curentItems] = right[i];
-				}
-				break;
-			}
+		}
+		else {
+			Buble(arr);
+			return;
 		}
 	}
-	else {
-		Buble(arr);
-		return;
+	catch (std::exception const& e)
+	{
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 }
 
 template<typename T>
 inline void Sorts::swap(T& arr, size_t first, size_t second)
 {
-	arr[first] += arr[second];
-	arr[second] = arr[first] - arr[second];
-	arr[first] -= arr[second];
+	try
+	{
+		arr[first] += arr[second];
+		arr[second] = arr[first] - arr[second];
+		arr[first] -= arr[second];
+	}
+	catch (std::exception const& e)
+	{
+		std::cerr << "Error: " << e.what() << std::endl;
+	}
 }
