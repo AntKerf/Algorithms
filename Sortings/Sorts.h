@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <ctime>
 
 class Sorts
 {
@@ -16,6 +17,9 @@ public:
 
 	template <typename T>
 	static void Merge(T& arr);
+
+	template <typename T>
+	static void Quick(T& arr);
 
 private:
 
@@ -196,6 +200,73 @@ inline void Sorts::Merge(T& arr)
 		std::cerr << "Error megre sort: " << e.what() << std::endl;
 	}
 }
+
+template<typename T>
+inline void Sorts::Quick(T& arr)
+{
+	try 
+	{
+		if (arr.size() > 1)
+		{
+			size_t targetIndex = rand() % (arr.size());
+			auto targetValue = arr[targetIndex];
+			for (size_t i = 0; i < arr.size(); i++)
+			{
+				if (arr[i] < targetValue && i > targetIndex)
+				{
+					auto tmp = arr[i];
+					for (size_t j = i; j > targetIndex; j--)//сдвиг значений массива
+					{
+						arr[j] = arr[j - 1];
+					}
+					targetIndex++;
+					arr[targetIndex - 1] = tmp;
+				}
+				else if (arr[i] > targetValue && i < targetIndex)
+				{
+					auto tmp = arr[i];
+					for (size_t j = i; j < targetIndex; j++)
+					{
+						arr[j] = arr[j + 1];
+					}
+					targetIndex--;
+					i--;
+					arr[targetIndex + 1] = tmp;
+				}
+			}
+			//разбивка массива на 2 части(< и >)
+			T left(targetIndex);
+			T right((arr.size() - targetIndex));
+			for (size_t i = 0; i < arr.size(); i++)
+			{
+				if (i < targetIndex) {
+					left[i] = arr[i];
+				}
+				else {
+					right[i - targetIndex] = arr[i];
+				}
+			}
+			//сортировка частей
+			Quick(left);
+			Quick(right);
+			//сборка исходного массива(сперва левая часть потом правая)
+			for (size_t i = 0; i < left.size(); i++)
+			{
+				arr[i] = left[i];
+			}
+			for (size_t i = 0; i < right.size(); i++)
+			{
+				arr[i + left.size()] = right[i];
+			}
+		}
+		return;
+	}
+	catch (std::exception const& e)
+	{
+		std::cerr << "Error quick sort: " << e.what() << std::endl;
+	}
+}
+
 
 template<typename T>
 inline void Sorts::swap(T& arr, size_t first, size_t second)
