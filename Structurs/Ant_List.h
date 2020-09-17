@@ -34,6 +34,10 @@ public:
 			Iterator itr = *this; head = head->getNext();
 			return itr;
 		}
+		Iterator operator++(int) {
+			Iterator itr = *this; head = head->getNext();
+			return itr;
+		}
 		V operator*() {
 			return head->getData();
 		}
