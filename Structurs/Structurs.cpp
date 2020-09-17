@@ -10,9 +10,10 @@ int main()
 	l.add(5);
 	l.add(5);
 	l.add(2);
-	for (auto i = l.begin(); i != l.end(); i++)
+
+	for (auto el:l)
 	{
-		std::cout << *i << std::endl;
+		std::cout << el << std::endl;
 	}
 
 	std::cout <<"Ant_List curent size: "<< l.size() << std::endl;

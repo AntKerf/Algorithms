@@ -30,7 +30,7 @@ public:
 		Iterator(Node* head) { 
 			this->head = head; 
 		}
-		Iterator operator++(int) {
+		Iterator operator++() {
 			Iterator itr = *this; head = head->getNext();
 			return itr;
 		}
