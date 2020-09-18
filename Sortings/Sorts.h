@@ -113,9 +113,9 @@ inline void Sorts::Insertion(T& arr)
 						auto tmpValue = arr[i];
 						for (size_t t = i; t >= j; t--)//сдвиг элементов
 						{
-							arr[t] = arr[t - 1];
+							arr[t] = std::move(arr[t - 1]);
 						}
-						arr[j] = tmpValue;//вставка
+						arr[j] = std::move(tmpValue);//вставка
 						swaped = true;
 					}
 				}
@@ -161,13 +161,13 @@ inline void Sorts::Merge(T& arr)
 					{
 						if (left[leftIndex] <= right[rightIndex])
 						{
-							arr[curentItems] = left[leftIndex];
+							arr[curentItems] = std::move(left[leftIndex]);
 							curentItems++;
 							countItems--;
 							leftIndex++;
 						}
 						else {
-							arr[curentItems] = right[rightIndex];
+							arr[curentItems] = std::move(right[rightIndex]);
 							curentItems++;
 							rightIndex++;
 							countItems--;
@@ -176,7 +176,7 @@ inline void Sorts::Merge(T& arr)
 					else {
 						for (size_t i = leftIndex; i < left.size(); i++, curentItems++, leftIndex++, countItems--)
 						{
-							arr[curentItems] = left[i];
+							arr[curentItems] = std::move(left[i]);
 						}
 						break;
 					}
@@ -184,7 +184,7 @@ inline void Sorts::Merge(T& arr)
 				else {
 					for (size_t i = rightIndex; i < right.size(); i++, curentItems++, rightIndex++, countItems--)
 					{
-						arr[curentItems] = right[i];
+						arr[curentItems] = std::move(right[i]);
 					}
 					break;
 				}
@@ -240,10 +240,10 @@ inline void Sorts::Quick(T& arr)
 			for (size_t i = 0; i < arr.size(); i++)
 			{
 				if (i < targetIndex) {
-					left[i] = arr[i];
+					left[i] = std::move(arr[i]);
 				}
 				else {
-					right[i - targetIndex] = arr[i];
+					right[i - targetIndex] = std::move(arr[i]);
 				}
 			}
 			//сортировка частей
@@ -252,11 +252,11 @@ inline void Sorts::Quick(T& arr)
 			//сборка исходного массива(сперва левая часть потом правая)
 			for (size_t i = 0; i < left.size(); i++)
 			{
-				arr[i] = left[i];
+				arr[i] = std::move(left[i]);
 			}
 			for (size_t i = 0; i < right.size(); i++)
 			{
-				arr[i + left.size()] = right[i];
+				arr[i + left.size()] = std::move(right[i]);
 			}
 		}
 		return;
@@ -273,9 +273,10 @@ inline void Sorts::swap(T& arr, size_t first, size_t second)
 {
 	try
 	{
-		arr[first] += arr[second];
-		arr[second] = arr[first] - arr[second];
-		arr[first] -= arr[second];
+		auto tmp = std::move(arr[second]);
+		arr[second] = std::move(arr[first]);
+		arr[first] = std::move(tmp);
+		
 	}
 	catch (std::exception const& e)
 	{

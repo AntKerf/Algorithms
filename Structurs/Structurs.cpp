@@ -1,5 +1,7 @@
 ﻿// Structurs.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
+#define _STD ::std::
+#define END ::std::endl
 
 #include <iostream>
 #include "Ant_List.h"
@@ -17,10 +19,10 @@ int main()
 
 	for (auto el:l)
 	{
-		std::cout << el << std::endl;
+		_STD cout << el << END;
 	}
 
-	std::cout <<"Ant_List curent size: "<< l.size() << std::endl;
+	_STD cout <<"Ant_List curent size: "<< l.size() << END;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
