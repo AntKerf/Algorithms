@@ -3,13 +3,17 @@
 
 #include <iostream>
 #include "Ant_List.h"
+#include <list>
 
 int main()
 {
 	Ant_List<int> l;
-	l.add(5);
-	l.add(5);
-	l.add(2);
+
+	l.push_front(1);
+	l.push_front(2);
+	l.push_back(3);
+
+	l.clear();
 
 	for (auto el:l)
 	{
