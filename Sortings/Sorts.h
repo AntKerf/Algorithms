@@ -30,8 +30,11 @@ private:
 template<typename T>
 inline void Sorts::Buble(T& arr)
 {
-	try
-	{
+	try {
+		if (arr.empty())
+		{
+			throw std::exception("this container is empty");
+		}
 		bool swaped;
 		do
 		{
@@ -60,7 +63,7 @@ inline void Sorts::Cocktail(T& arr)
 	{
 		if (arr.size() < 2)
 		{
-			throw std::exception("Very small array size for sorting");
+			throw std::exception("this container is empty or small size");
 		}
 		size_t left = 0, right = 0;
 		right = arr.size() - 1;
@@ -76,7 +79,7 @@ inline void Sorts::Cocktail(T& arr)
 					swaped = true;
 				}
 			}
-			right-=1;
+			right -= 1;
 			for (size_t i = right; i > left; i--)
 			{
 				if (arr[i] < arr[i - 1])
@@ -99,6 +102,10 @@ inline void Sorts::Insertion(T& arr)
 {
 	try
 	{
+		if (arr.size() <= 1)
+		{
+			throw std::exception("this container is empty or small size");
+		}
 		bool swaped;
 		do {
 			swaped = false;
@@ -133,6 +140,11 @@ inline void Sorts::Merge(T& arr)
 {
 	try
 	{
+		if (arr.empty())
+		{
+			throw std::exception("this container is empty");
+		}
+
 		if (arr.size() > 2)
 		{
 			size_t leftSize = arr.size() / 2;
@@ -197,75 +209,68 @@ inline void Sorts::Merge(T& arr)
 	}
 	catch (std::exception const& e)
 	{
-		std::cerr << "Error megre sort: " << e.what() << std::endl;
+		std::cerr << "Error merge sort: " << e.what() << std::endl;
 	}
 }
 
 template<typename T>
 inline void Sorts::Quick(T& arr)
 {
-	try 
+	if (arr.size() > 1)
 	{
-		if (arr.size() > 1)
+		size_t targetIndex = rand() % (arr.size());
+		auto targetValue = arr[targetIndex];
+		for (size_t i = 0; i < arr.size(); i++)
 		{
-			size_t targetIndex = rand() % (arr.size());
-			auto targetValue = arr[targetIndex];
-			for (size_t i = 0; i < arr.size(); i++)
+			if (arr[i] < targetValue && i > targetIndex)
 			{
-				if (arr[i] < targetValue && i > targetIndex)
+				auto tmp = arr[i];
+				for (size_t j = i; j > targetIndex; j--)//сдвиг значений массива
 				{
-					auto tmp = arr[i];
-					for (size_t j = i; j > targetIndex; j--)//сдвиг значений массива
-					{
-						arr[j] = arr[j - 1];
-					}
-					targetIndex++;
-					arr[targetIndex - 1] = tmp;
+					arr[j] = arr[j - 1];
 				}
-				else if (arr[i] > targetValue && i < targetIndex)
+				targetIndex++;
+				arr[targetIndex - 1] = tmp;
+			}
+			else if (arr[i] > targetValue && i < targetIndex)
+			{
+				auto tmp = arr[i];
+				for (size_t j = i; j < targetIndex; j++)
 				{
-					auto tmp = arr[i];
-					for (size_t j = i; j < targetIndex; j++)
-					{
-						arr[j] = arr[j + 1];
-					}
-					targetIndex--;
-					i--;
-					arr[targetIndex + 1] = tmp;
+					arr[j] = arr[j + 1];
 				}
-			}
-			//разбивка массива на 2 части(< и >)
-			T left(targetIndex);
-			T right((arr.size() - targetIndex));
-			for (size_t i = 0; i < arr.size(); i++)
-			{
-				if (i < targetIndex) {
-					left[i] = std::move(arr[i]);
-				}
-				else {
-					right[i - targetIndex] = std::move(arr[i]);
-				}
-			}
-			//сортировка частей
-			Quick(left);
-			Quick(right);
-			//сборка исходного массива(сперва левая часть потом правая)
-			for (size_t i = 0; i < left.size(); i++)
-			{
-				arr[i] = std::move(left[i]);
-			}
-			for (size_t i = 0; i < right.size(); i++)
-			{
-				arr[i + left.size()] = std::move(right[i]);
+				targetIndex--;
+				i--;
+				arr[targetIndex + 1] = tmp;
 			}
 		}
-		return;
-	}
-	catch (std::exception const& e)
-	{
-		std::cerr << "Error quick sort: " << e.what() << std::endl;
+		//разбивка массива на 2 части(< и >)
+		T left(targetIndex);
+		T right((arr.size() - targetIndex));
+		for (size_t i = 0; i < arr.size(); i++)
+		{
+			if (i < targetIndex) {
+				left[i] = std::move(arr[i]);
+			}
+			else {
+				right[i - targetIndex] = std::move(arr[i]);
+			}
+		}
+		//сортировка частей
+		Quick(left);
+		Quick(right);
+		//сборка исходного массива(сперва левая часть потом правая)
+		for (size_t i = 0; i < left.size(); i++)
+		{
+			arr[i] = std::move(left[i]);
+		}
+		for (size_t i = 0; i < right.size(); i++)
+		{
+			arr[i + left.size()] = std::move(right[i]);
+		}
 	}
 }
+
 
 
 template<typename T>
@@ -276,7 +281,7 @@ inline void Sorts::swap(T& arr, size_t first, size_t second)
 		auto tmp = std::move(arr[second]);
 		arr[second] = std::move(arr[first]);
 		arr[first] = std::move(tmp);
-		
+
 	}
 	catch (std::exception const& e)
 	{
