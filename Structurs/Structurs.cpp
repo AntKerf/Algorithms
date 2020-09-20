@@ -17,14 +17,16 @@ int main()
 	l.push_back(3);
 	//l = {2, 1, 3}
 
+	
+
 	if (l.emplace(l.find(1), 5) != NULL) _STD cout << "Success emplace" << END;
 	else _STD cout << "Failure emplace" << END;
 
 	_STD cout << "Items: "<< END;
 
-	for (auto el:l)
+	for (auto el : l)
 	{
-		_STD cout <<"\t"<< el << END;
+		_STD cout << "\t" << el << END;
 	}
 
 	_STD cout <<"Ant_List size: "<< l.size() << END;

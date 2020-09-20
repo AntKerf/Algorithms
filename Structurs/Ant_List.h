@@ -118,9 +118,7 @@ public:
 		}
 		else return NULL;
 	}
-
 };
-
 
 template<typename V>
 inline Ant_List<V>::Ant_List()
@@ -147,57 +145,43 @@ inline Ant_List<V>::~Ant_List()
 template<typename V>
 inline void Ant_List<V>::push_front(V&& newData)
 {
-	try
-	{
-		Node* tmp = new Node();
-		tmp->setData(_STD move(newData));
+	Node* tmp = new Node();
+	tmp->setData(_STD move(newData));
 
-		if (count == 0)
-		{
-			tmp->setNext(last);
-			first = tmp;
-		}
-		else {
-			tmp->setNext(first);
-			first = tmp;
-		}
-		count++;
-	}
-	catch (std::exception const& e)
+	if (count == 0)
 	{
-		std::cerr << "Error: " << e.what() << std::endl;
+		tmp->setNext(last);
+		first = tmp;
 	}
+	else {
+		tmp->setNext(first);
+		first = tmp;
+	}
+	count++;
 }
 
 template<typename V>
 inline void Ant_List<V>::push_front(V& newData)
 {
-	try
-	{
-		Node* tmp = new Node();
-		tmp->setData(newData);
+	Node* tmp = new Node();
+	tmp->setData(newData);
 
-		if (count == 0)
-		{
-			tmp->setNext(last);
-			first = tmp;
-		}
-		else {
-			tmp->setNext(first);
-			first = tmp;
-		}
-		count++;
-	}
-	catch (std::exception const& e)
+	if (count == 0)
 	{
-		std::cerr << "Error: " << e.what() << std::endl;
+		tmp->setNext(last);
+		first = tmp;
 	}
+	else {
+		tmp->setNext(first);
+		first = tmp;
+	}
+	count++;
 }
 
 template<typename V>
 inline void Ant_List<V>::push_back(V&& newData)
 {
-	try
+	if (count > 0)
 	{
 		Node* tmp = first;
 		Node* insertItem = new Node();//new item for insert
@@ -211,22 +195,18 @@ inline void Ant_List<V>::push_back(V&& newData)
 		tmp->setNext(insertItem);
 		count++;
 	}
-	catch (std::exception const& e)
-	{
-		std::cerr << "Error: " << e.what() << std::endl;
-	}
+	else push_front(_STD move(newData));
 }
 
 template<typename V>
 inline void Ant_List<V>::push_back(V& newData)
 {
-	try
+	if (count > 0)
 	{
 		Node* tmp = first;
 		Node* insertItem = new Node();//new item for insert
 		insertItem->setData(newData);
 		insertItem->setNext(last);
-
 		for (size_t i = 0; i < count - 1; i++)
 		{
 			tmp = tmp->getNext();
@@ -234,16 +214,13 @@ inline void Ant_List<V>::push_back(V& newData)
 		tmp->setNext(insertItem);
 		count++;
 	}
-	catch (std::exception const& e)
-	{
-		std::cerr << "Error: " << e.what() << std::endl;
-	}
+	else push_front(newData);
 }
 
 template<typename V>
 inline void Ant_List<V>::clear()
 {
-	try
+	if (count > 0)
 	{
 		Node* tmp = first;
 		Node* deleteitem;
@@ -254,14 +231,9 @@ inline void Ant_List<V>::clear()
 			tmp = tmp->getNext();
 			delete deleteitem;
 		}
-
 		last = new Node();
 		first = last;
 		count = 0;
-	}
-	catch (std::exception const& e)
-	{
-		std::cerr << "Error: " << e.what() << std::endl;
 	}
 }
 
@@ -285,7 +257,7 @@ inline V Ant_List<V>::front()
 	catch (std::exception const& e)
 	{
 		std::cerr << "Error: " << e.what() << std::endl;
-		return NULL;
+		_STD terminate();
 	}
 }
 
@@ -305,7 +277,7 @@ inline V Ant_List<V>::back()
 	catch (std::exception const& e)
 	{
 		std::cerr << "Error: " << e.what() << std::endl;
-		return NULL;
+		_STD terminate();
 	}
 }
 
