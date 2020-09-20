@@ -3,7 +3,6 @@
 
 #include <iostream>
 
-
 template <typename V>
 class Ant_List
 {
@@ -99,11 +98,11 @@ public:
 		return it;
 	};
 
-	Iterator emplace(Iterator It, V&& newItem) {
+	Iterator emplace(Iterator It, V&& newData) {
 		if (It != NULL)
 		{
 			Iterator it = It;
-			it = newItem;
+			it = newData;
 			return it;
 		}
 		else return NULL;
