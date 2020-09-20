@@ -89,6 +89,7 @@ public:
 		}
 		return it;
 	};
+	//:~O(n)
 	Iterator find(V& searchItem) {
 		Iterator it = begin();
 		for (size_t i = 0; i < count; i++, it++)
@@ -97,7 +98,7 @@ public:
 		}
 		return it;
 	};
-
+	//:~O(1)
 	Iterator emplace(Iterator It, V&& newData) {
 		if (It != NULL)
 		{
@@ -107,6 +108,7 @@ public:
 		}
 		else return NULL;
 	}
+	//:~O(1)
 	Iterator emplace(Iterator It, V& newData) {
 		if (It != NULL)
 		{
@@ -294,7 +296,7 @@ inline V Ant_List<V>::back()
 	{
 		if (count < 1)
 		{
-			throw _STD exception("List empty, front() exception");
+			throw _STD exception("List empty, back() exception");
 		}
 		Iterator it = begin();
 		for (size_t i = 0; i < count - 1; i++, it++);
