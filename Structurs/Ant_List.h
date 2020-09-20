@@ -246,39 +246,22 @@ inline size_t Ant_List<V>::size()
 template<typename V>
 inline V Ant_List<V>::front()
 {
-	try
-	{
-		if (count < 1)
-		{
-			throw _STD exception("List empty, front() exception");
-		}
-		return first->getData();
-	}
-	catch (std::exception const& e)
-	{
-		std::cerr << "Error: " << e.what() << std::endl;
-		_STD terminate();
-	}
+#ifdef _DEBUG
+	_STL_VERIFY(count < 1, "List empty, front() exception");//throw
+#endif // _DEBUG
+	return first->getData();
 }
 
 template<typename V>
 inline V Ant_List<V>::back()
 {
-	try
-	{
-		if (count < 1)
-		{
-			throw _STD exception("List empty, back() exception");
-		}
-		Iterator it = begin();
-		for (size_t i = 0; i < count - 1; i++, it++);
-		return *it;
-	}
-	catch (std::exception const& e)
-	{
-		std::cerr << "Error: " << e.what() << std::endl;
-		_STD terminate();
-	}
+#ifdef _DEBUG
+	_STL_VERIFY(count < 1, "List empty, back() exception");//throw
+#endif // _DEBUG
+
+	Iterator it = begin();
+	for (size_t i = 0; i < count - 1; i++, it++);
+	return *it;
 }
 
 template<typename V>
@@ -302,5 +285,5 @@ inline auto Ant_List<V>::Node::getNext()
 template<typename V>
 inline V Ant_List<V>::Node::getData()
 {
-	return Data;
+	return this->Data;
 }
