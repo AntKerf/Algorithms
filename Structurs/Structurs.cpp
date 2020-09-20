@@ -10,19 +10,30 @@
 int main()
 {
 	Ant_List<int> l;
+	_STD list<int> sl;
 
 	l.push_front(1);
 	l.push_front(2);
 	l.push_back(3);
+	//l = {2, 1, 3}
 
-	l.clear();
+	if (l.emplace(l.find(1), 5) != NULL) _STD cout << "Success emplace" << END;
+	else _STD cout << "Failure emplace" << END;
+
+	_STD cout << "Items: "<< END;
 
 	for (auto el:l)
 	{
-		_STD cout << el << END;
+		_STD cout <<"\t"<< el << END;
 	}
 
-	_STD cout <<"Ant_List curent size: "<< l.size() << END;
+	_STD cout <<"Ant_List size: "<< l.size() << END;
+
+	_STD cout << "Front: " << l.front() << END;
+	_STD cout << "Back: " << l.back() << END;
+
+	l.clear();
+	_STD cout << "Ant_List size after clear: " << l.size() << END;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
