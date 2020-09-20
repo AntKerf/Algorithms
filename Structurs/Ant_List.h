@@ -29,8 +29,8 @@ public:
 	private:
 		Node* head;
 	public:
-		Iterator(Node* head) { 
-			this->head = head; 
+		Iterator(Node* head) {
+			this->head = head;
 		}
 		Iterator operator++() {
 			Iterator itr = *this; head = head->getNext();
@@ -83,7 +83,7 @@ public:
 	//:~O(n)
 	Iterator find(V&& searchItem) {
 		Iterator it = begin();
-		for (size_t i = 0; i < count; i++,it++)
+		for (size_t i = 0; i < count; i++, it++)
 		{
 			if (*it == _STD move(searchItem)) break;
 		}
@@ -99,6 +99,15 @@ public:
 	};
 
 	Iterator emplace(Iterator It, V&& newData) {
+		if (It != NULL)
+		{
+			Iterator it = It;
+			it = _STD move(newData);
+			return it;
+		}
+		else return NULL;
+	}
+	Iterator emplace(Iterator It, V& newData) {
 		if (It != NULL)
 		{
 			Iterator it = It;
@@ -288,7 +297,7 @@ inline V Ant_List<V>::back()
 			throw _STD exception("List empty, front() exception");
 		}
 		Iterator it = begin();
-		for (size_t i = 0; i < count-1; i++, it++);
+		for (size_t i = 0; i < count - 1; i++, it++);
 		return *it;
 	}
 	catch (std::exception const& e)
