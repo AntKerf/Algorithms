@@ -35,7 +35,7 @@ int main()
 	l.clear();
 	_STD cout << "Ant_List size after clear: " << l.size() << END;
 
-	//генерируем исключение вызвав .front() на пустой список
+	//генерируем исключение вызвав .front() на пустой список (Abort() только при дебаге)
 	_STD cout << "\nAttention!!! throw!!!" << END;
 	_STD cout << l.front() << END;
 }

@@ -123,9 +123,9 @@ public:
 template<typename V>
 inline Ant_List<V>::Ant_List()
 	:last(NULL),
-	first(NULL),
 	count(0)
 {
+	first = new Node();	
 }
 
 template<typename V>
@@ -260,7 +260,9 @@ inline V Ant_List<V>::back()
 #endif // _DEBUG
 
 	Iterator it = begin();
-	for (size_t i = 0; i < count - 1; i++, it++);
+	if (count > 0) {
+		for (size_t i = 0; i < count - 1; i++, it++);
+	}
 	return *it;
 }
 
