@@ -157,7 +157,7 @@ inline void Ant_List<V>::push_front(V&& newData)
 		tmp->setNext(first);
 		first = tmp;
 	}
-	count++;
+	++count;
 }
 
 template<typename V>
@@ -175,7 +175,7 @@ inline void Ant_List<V>::push_front(V& newData)
 		tmp->setNext(first);
 		first = tmp;
 	}
-	count++;
+	++count;
 }
 
 template<typename V>
@@ -193,7 +193,7 @@ inline void Ant_List<V>::push_back(V&& newData)
 			tmp = tmp->getNext();
 		}
 		tmp->setNext(insertItem);
-		count++;
+		++count;
 	}
 	else push_front(_STD move(newData));
 }
@@ -212,7 +212,7 @@ inline void Ant_List<V>::push_back(V& newData)
 			tmp = tmp->getNext();
 		}
 		tmp->setNext(insertItem);
-		count++;
+		++count;
 	}
 	else push_front(newData);
 }
