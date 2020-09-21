@@ -247,7 +247,7 @@ template<typename V>
 inline V Ant_List<V>::front()
 {
 #ifdef _DEBUG
-	_STL_VERIFY(count < 1, "List empty, front() exception");//throw
+	_STL_VERIFY(count > 0, "List empty, front() exception");//throw
 #endif // _DEBUG
 	return first->getData();
 }
@@ -256,7 +256,7 @@ template<typename V>
 inline V Ant_List<V>::back()
 {
 #ifdef _DEBUG
-	_STL_VERIFY(count < 1, "List empty, back() exception");//throw
+	_STL_VERIFY(count > 0, "List empty, back() exception");//throw
 #endif // _DEBUG
 
 	Iterator it = begin();
