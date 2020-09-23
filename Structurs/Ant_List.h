@@ -118,6 +118,10 @@ public:
 		}
 		else return NULL;
 	}
+	void operator =(V value)
+	{
+		this->push_front(value);
+	}
 };
 
 template<typename V>
@@ -137,7 +141,7 @@ inline Ant_List<V>::~Ant_List()
 	{
 		deleteitem = tmp;
 		tmp = tmp->getNext();
-		delete deleteitem;
+		deleteitem = new Node();
 	}
 	count = 0;
 }

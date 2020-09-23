@@ -6,10 +6,18 @@
 
 #include <iostream>
 #include "Ant_List.h"
-#include <list>
 
+#include "Ant_Hash.h"
+#include <unordered_map>
+#define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
 int main()
 {
+	Ant_Hash<_STD string, int> hl;
+	hl.reserve(10);
+	hl.add("white", 10);
+	hl["black"] = 50;
+	hl.size();
+
 	Ant_List<int> l;
 
 	l.push_front(1);
