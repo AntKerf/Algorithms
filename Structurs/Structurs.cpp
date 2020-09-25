@@ -9,11 +9,11 @@
 #include "Ant_Hash.h"
 int main()
 {
-	Ant_Hash<_STD string, int> hl;
+	Ant_Hash<int, int> hl;
 	hl.reserve(10);
-	hl.add("white", 10);
-	hl["black"] = 50;
-	hl.size();
+	hl.add(0, 10);
+	hl[2] = 50;
+	_STD cout << hl[2].front() << END;
 
 	Ant_List<int> l;
 

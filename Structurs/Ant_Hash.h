@@ -11,7 +11,8 @@ class Ant_Hash
 private:
 	size_t count;
 	size_t capacity_t;
-	size_t hash_func(K key);
+	size_t hash_func(_STD string key);
+	size_t hash_func(int key);
 	Ant_List<V> *table;
 
 public:
@@ -36,11 +37,16 @@ inline Ant_Hash<K, V>::Ant_Hash()
 }
 
 template<typename K, typename V>
-inline size_t Ant_Hash<K, V>::hash_func(K key)
+inline size_t Ant_Hash<K, V>::hash_func(_STD string key)
 {
 	return key[0] % capacity_t;
 }
 
+template<typename K, typename V>
+inline size_t Ant_Hash<K, V>::hash_func(int key)
+{
+	return key % capacity_t;
+}
 
 template<typename K, typename V>
 inline void Ant_Hash<K, V>::reserve(int countItems)
