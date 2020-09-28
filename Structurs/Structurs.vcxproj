@@ -147,6 +147,9 @@
     <ClInclude Include="Ant_Hash.h" />
     <ClInclude Include="Ant_List.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="AntNatvis.natvis" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
