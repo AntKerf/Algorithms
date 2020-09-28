@@ -27,7 +27,7 @@ int main()
 
 	_STD cout << "Items: "<< END;
 
-	for (auto el : l)
+	for (auto el : l) // вывод всем элементов списка через итераторы begin() и end()
 	{
 		_STD cout << "\t" << el << END;
 	}
