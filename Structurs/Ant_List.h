@@ -32,6 +32,15 @@ public:
 		Iterator(Node* head) {
 			this->head = head;
 		}
+		Iterator getNext() {
+			Iterator it = *this;
+			it = head->getNext();
+			return it;
+		}
+		Node* _head()
+		{
+			return head;
+		}
 		Iterator operator++() {
 			Iterator itr = *this; head = head->getNext();
 			return itr;
@@ -117,6 +126,33 @@ public:
 			return it;
 		}
 		else return NULL;
+	}
+	//~O(n)
+	Iterator erase(Iterator first, Iterator last) {
+		if (first != NULL)
+		{
+			Iterator it = begin();
+			if (it != first) {
+				while (it.getNext() != first) {
+					it++;
+				}
+				it._head()->setNext(last._head()->getNext());
+			}
+			else {
+			this->first = last._head()->getNext();
+			}
+			while (first != last)
+			{
+				--count;
+				auto tmp = first;
+				first++;
+				delete tmp._head();
+			}
+			delete last._head();
+			--count;
+			return it;
+		}
+		return NULL;
 	}
 	void operator =(V value)
 	{
