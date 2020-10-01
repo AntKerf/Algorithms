@@ -17,37 +17,23 @@ Structurs - проект с реализациями некоторых стру
 Хэш-таблица реализованна на основе односвязных списков и имеет открытое хэширование.
 
 <a name="methods"><h2>Методы</h2></a>
-  
+```  
 void push_front(V&&)          - Вставка элемента в начало списка за O(1)
-
 void push_front(V&)   
-
 void push_back(V&&)           - Вставка элемента в конец списка за О(n)
-
 void push_back(V&)
-
 void clear()                  - Очистка списка за O(n)
-
 size_t size()                 - Возвращает текущий размер списка, О(1)
-
 V front()                     - Возвращает первый элемент списка, О(1)
-
 V back()                      - Возвращает последний элемент списка, О(1)
-
 Iterator begin()              - Иттератор начала списка
-
 Iterator end()                - Иттератор конца списка, УКАЗЫВАЕТ НА НЕСУЩЕСТУЮЩИЙ ЭЛЕМЕНТ.
-
 Iterator find(V&& searchItem) -Возвращает иттератор на ПЕРВЫЙ элемент который соотвествует условию searchItem == ItemInList
-
 Iterator find(V& searchItem)
-
 Iterator emplace(Iterator It, V&& newData)    -Выполняет замену элемента списка, на который указывает иттератор It, на элемент newData, ~O(n)
-
 Iterator emplace(Iterator It, V& newData)
-
 Iterator erase(Iterator first, Iterator last) -Выполняет удаление элементов на промежутке от first до last, ВКЛЮЧИТЕЛЬНО. ~O(n)
-  
+```
 <a name="Cmake"><h2>Сборка в CMake</h2></a>
 + Создайте папку build в удобном месте
 + В командной строке(cmd) зайдите в созданную папку build (cd ../build)
