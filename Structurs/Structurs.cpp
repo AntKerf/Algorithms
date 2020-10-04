@@ -12,8 +12,8 @@ int main()
 	Ant_Hash<int, int> hl;
 	hl.reserve(10);
 	hl.add(0, 10);
-	hl[2] = 50;
-	_STD cout << hl[2].front() << END;
+	hl.add(5, 40);
+	_STD cout << hl.size()<< END;
 
 	Ant_List<int> l;
 

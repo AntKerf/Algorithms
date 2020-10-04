@@ -22,8 +22,8 @@ private:
 	Node* first;
 	Node* last;
 	size_t count;
-
 public:
+	
 	class Iterator
 	{
 	private:
