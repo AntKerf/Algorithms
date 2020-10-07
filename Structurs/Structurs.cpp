@@ -11,7 +11,8 @@ int main()
 {
 	Ant_Hash<int, int> hl;
 	hl.reserve(10);
-	hl.add(0, 10);
+	hl.add(1, 10);
+	hl.add(1, 11);
 	hl.add(5, 40);
 	_STD cout << hl.size()<< END;
 

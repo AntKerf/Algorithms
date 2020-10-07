@@ -12,4 +12,19 @@
       </LinkedListItems>
     </Expand>
   </Type>
+  <Type Name="Ant_Hash&lt;*&gt;">
+    <DisplayString>{{ size={count}}}</DisplayString>
+    <Expand>
+      <Item Name="[size]">count</Item>
+      <Item Name="[count_bucket]">count_bucket</Item>
+      <CustomListItems MaxItemsPerView="5000">
+        <Variable Name="i" InitialValue="0" />
+        <Size>count_bucket</Size>
+        <Loop>
+          <Item Name="{keys[i]}" Condition="table[i].count > 0">table[i]</Item>
+          <Exec>i++</Exec>
+        </Loop>
+      </CustomListItems>
+    </Expand>
+  </Type>
 </AutoVisualizer>
