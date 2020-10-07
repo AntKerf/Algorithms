@@ -22,7 +22,7 @@ private:
 	Ant_List<V>* table;
 public:
 	Ant_Hash();
-
+	~Ant_Hash();
 	void reserve(int);
 	void add(K, V);
 	size_t size();
@@ -44,6 +44,13 @@ inline Ant_Hash<K, V>::Ant_Hash()
 
 	//keys = _STD make_unique<K[]>(capacity_t);
 	keys = new K[capacity_t]();
+}
+
+template<typename K, typename V>
+inline Ant_Hash<K, V>::~Ant_Hash()
+{
+	delete[] table;
+	delete[] keys;
 }
 
 template<typename K, typename V>
