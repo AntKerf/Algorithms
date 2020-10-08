@@ -18,13 +18,11 @@
       <Item Name="[size]">count</Item>
       <Item Name="[count_bucket]">count_bucket</Item>
       <CustomListItems MaxItemsPerView="5000">
-        <Variable Name="i" InitialValue="0" />
         <Variable Name="ptrKeys" InitialValue="keys._Mypair._Myval2" />
         <Variable Name="ptrTable" InitialValue="table._Mypair._Myval2" />
         <Size>count_bucket</Size>
         <Loop>
           <Item Name="{*ptrKeys}" Condition="ptrTable->count > 0">*ptrTable</Item>
-          <Exec>i++</Exec>
           <Exec>ptrKeys++</Exec>
           <Exec>ptrTable++</Exec>
         </Loop>
