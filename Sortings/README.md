@@ -30,7 +30,7 @@
 
 'size()'
 
-'operator[](size_t)'
+'operator\[\](size_t)'
 
 <a name="Cmake"><h2>Сборка в CMake</h2></a>
 
